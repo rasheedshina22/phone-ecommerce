@@ -5,8 +5,23 @@ export const ProductContext = React.createContext();
 
 export default class ProductProvider extends Component {
   state = {
-    products: storeProducts,
+    products: [],
     detailProduct,
+  };
+
+  componentDidMount() {
+    this.setProducts();
+  }
+
+  setProducts = () => {
+    let tempProducts = [];
+    storeProducts.forEach((item) => {
+      const singleitem = { ...item };
+      tempProducts = [...tempProducts, singleitem];
+    });
+    this.setState(() => {
+      return { products: tempProducts };
+    });
   };
 
   handleDetail = () => {

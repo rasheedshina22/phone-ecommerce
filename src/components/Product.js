@@ -6,7 +6,7 @@ import { FaCartPlus } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
 const Product = ({ product }) => {
-  const { id, title, img, price, inCart } = product;
+  const { title, img, price, inCart } = product;
   return (
     <ProductWrapper className='col-9 mx-auto col-md-6 col-lg-3 my-3'>
       <div className='card'>
@@ -106,7 +106,6 @@ const ProductWrapper = styled.div`
 `;
 
 Product.propTyes = {
-  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   inCart: PropTypes.bool.isRequired,
