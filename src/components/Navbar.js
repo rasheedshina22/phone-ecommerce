@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import { FaCartPlus } from 'react-icons/fa';
-
+import { ButtonContainer } from '../components/Button';
+import styled from 'styled-components';
 export default class Navbar extends Component {
   render() {
     return (
-      <nav className='navbar navbar-expand-sm bg-primary navbar-dark px-sm-5'>
+      <NavWrapper className='navbar navbar-expand-sm navbar-dark px-sm-5'>
         {/*  https://www.iconfinder.com/icons/1243689/call_phone_icon Creative
         Commons (Attribution 3.0 Unported);
         https://www.iconfinder.com/Makoto_msk */}
@@ -21,12 +22,21 @@ export default class Navbar extends Component {
           </li>
         </ul>
         <Link to='/cart' className='ml-auto'>
-          <button>
-            <FaCartPlus />
+          <ButtonContainer>
+            <FaCartPlus className='mr-2' />
             cart
-          </button>
+          </ButtonContainer>
         </Link>
-      </nav>
+      </NavWrapper>
     );
   }
 }
+
+const NavWrapper = styled.nav`
+  background: var(--mainBlue);
+  .nav-link {
+    color: var(--mainWhite) !important;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+  }
+`;
