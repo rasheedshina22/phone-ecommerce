@@ -5,7 +5,7 @@ import { ProductContext } from '../context';
 
 const ProductDetails = () => {
   const context = useContext(ProductContext);
-  const { productDetail, addToCart } = context;
+  const { productDetail, addToCart, openModal } = context;
   const { id, company, img, info, price, title, inCart } = productDetail;
   return (
     <div className='container py-5'>
@@ -46,6 +46,7 @@ const ProductDetails = () => {
                 disabled={inCart ? true : false}
                 onClick={() => {
                   addToCart(id);
+                  openModal(id);
                 }}
               >
                 {inCart ? 'inCart' : 'add to cart'}

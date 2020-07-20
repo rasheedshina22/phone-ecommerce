@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-// import {ProductContext} from '../context'
+import { ProductContext } from '../context';
 import { FaCartPlus } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
 const Product = ({ product }) => {
-  const { title, img, price, inCart } = product;
+  const { id, title, img, price, inCart } = product;
+  const context = useContext(ProductContext);
+  const { handleDetail, addToCart, openModal } = context;
   return (
     <ProductWrapper className='col-9 mx-auto col-md-6 col-lg-3 my-3'>
       <div className='card'>
-        <div
-          className='img-container p-5'
-          onClick={() => console.log('you click me')}
-        >
+        <div className='img-container p-5' onClick={() => handleDetail(id)}>
           <Link to='/details'>
             <img src={img} alt='product' className='card-img-top' />
           </Link>
@@ -21,7 +20,8 @@ const Product = ({ product }) => {
             className='cart-btn'
             disabled={inCart ? true : false}
             onClick={() => {
-              console.log('added to cart');
+              addToCart(id);
+              openModal(id);
             }}
           >
             {inCart ? (
