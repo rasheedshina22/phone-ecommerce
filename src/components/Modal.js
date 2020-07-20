@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { ProductContext } from '../context';
-import { ButtonContainer } from './Button';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { ProductContext } from "../context";
+import { ButtonContainer } from "./Button";
+import { Link } from "react-router-dom";
 
 const Modal = () => {
   const context = useContext(ProductContext);
@@ -13,23 +13,23 @@ const Modal = () => {
   } else {
     return (
       <ModalContainer>
-        <div className='container'>
-          <div className='row'>
+        <div className="container">
+          <div className="row">
             <div
-              id='modal'
-              className='col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5'
+              id="modal"
+              className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5"
             >
               <h5>item added to the cart</h5>
-              <img src={img} alt='product' className='img-fluid' />
+              <img src={img} alt="product" className="img-fluid" />
               <h5>{title}</h5>
-              <h5 className='text-muted'>price: ${price}</h5>
-              <Link to='/'>
+              <h5 className="text-muted">price: ${price}</h5>
+              <Link to="/">
                 <ButtonContainer onClick={() => closeModal()}>
                   continue shopping
                 </ButtonContainer>
               </Link>
 
-              <Link to='/cart'>
+              <Link to="/cart">
                 <ButtonContainer cart onClick={() => closeModal()}>
                   go to cart
                 </ButtonContainer>

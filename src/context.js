@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { storeProducts, productDetail } from './data';
+import React, { Component } from "react";
+import { storeProducts, productDetail } from "./data";
 
 export const ProductContext = React.createContext();
 
@@ -8,9 +8,12 @@ export default class ProductProvider extends Component {
   state = {
     products: [],
     productDetail,
-    cart: [],
+    cart: storeProducts,
     modalOpen: false,
     modalProduct: productDetail,
+    cartSubTotal: 0,
+    cartTax: 0,
+    carTotal: 0,
   };
 
   componentDidMount() {
@@ -53,7 +56,10 @@ export default class ProductProvider extends Component {
 
     this.setState(
       () => {
-        return { products: tempProducts, cart: [...this.state.cart, product] };
+        return {
+          products: tempProducts,
+          cart: [...this.state.cart, product],
+        };
       },
       () => console.log(this.state)
     );
@@ -71,6 +77,23 @@ export default class ProductProvider extends Component {
       return { modalOpen: false };
     });
   };
+
+  increment = (id) => {
+    console.log("this is the increment method");
+  };
+
+  decrement = (id) => {
+    console.log("this is the decrement method");
+  };
+
+  removeItem = (id) => {
+    console.log("this is the remove method");
+  };
+
+  clearCart = () => {
+    console.log("cart was cleared");
+  };
+
   render() {
     return (
       <div>
@@ -81,6 +104,10 @@ export default class ProductProvider extends Component {
             addToCart: this.addToCart,
             openModal: this.openModal,
             closeModal: this.closeModal,
+            increment: this.increment,
+            decrement: this.decrement,
+            removeItem: this.removeItem,
+            clearCart: this.clearCart,
           }}
         >
           {this.props.children}
