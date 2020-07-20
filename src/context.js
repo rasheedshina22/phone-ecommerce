@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { storeProducts, detailProduct } from './data';
+import { storeProducts, productDetail } from './data';
 
 export const ProductContext = React.createContext();
 
+//what is the referencing issue in javascript
 export default class ProductProvider extends Component {
   state = {
     products: [],
-    detailProduct,
+    productDetail,
   };
 
   componentDidMount() {
