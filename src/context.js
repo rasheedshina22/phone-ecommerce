@@ -8,12 +8,12 @@ export default class ProductProvider extends Component {
   state = {
     products: [],
     productDetail,
-    cart: storeProducts,
+    cart: [],
     modalOpen: false,
     modalProduct: productDetail,
     cartSubTotal: 0,
     cartTax: 0,
-    carTotal: 0,
+    cartTotal: 0,
   };
 
   componentDidMount() {
@@ -61,7 +61,9 @@ export default class ProductProvider extends Component {
           cart: [...this.state.cart, product],
         };
       },
-      () => console.log(this.state)
+      () => {
+        this.addTotals();
+      }
     );
   };
 
@@ -91,7 +93,30 @@ export default class ProductProvider extends Component {
   };
 
   clearCart = () => {
-    console.log("cart was cleared");
+    this.setState(
+      () => {
+        return { cart: [] };
+      },
+      () => {
+        this.setProducts();
+      }
+    );
+  };
+
+  addTotals = () => {
+    let subTotal = 0;
+    this.state.cart.map((item) => (subTotal += item.total));
+    const temTax = subTotal * 0.1;
+    const tax = parseFloat(temTax.toFixed(2));
+    //toFixed usually returns a string
+    const total = subTotal + tax;
+    this.setState(() => {
+      return {
+        cartSubTotal: subTotal,
+        cartTax: tax,
+        cartTotal: total,
+      };
+    });
   };
 
   render() {

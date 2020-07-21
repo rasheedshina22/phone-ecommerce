@@ -4,6 +4,7 @@ import CartColumns from "./CartColumns";
 import EmptyCart from "./EmptyCart";
 import { ProductContext } from "../../context";
 import CartList from "./CartList";
+import CartTotals from "./CartTotals";
 
 const Cart = () => {
   const context = useContext(ProductContext);
@@ -15,6 +16,7 @@ const Cart = () => {
           <Title name="your" title="cart" />
           <CartColumns />
           <CartList context={context} />
+          <CartTotals context={context} />
         </>
       ) : (
         <EmptyCart />
