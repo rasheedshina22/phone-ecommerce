@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PayPayButton from "./PayPayButton";
 
-export default function CartTotals({ context }) {
+export default function CartTotals({ context, history }) {
   const { cartSubTotal, cartTax, cartTotal, clearCart } = context;
   return (
     <>
@@ -31,6 +32,11 @@ export default function CartTotals({ context }) {
               <span className="text-title">total:</span>
               <strong>$ {cartTotal}</strong>
             </h5>
+            <PayPayButton
+              total={cartTotal}
+              clearCart={clearCart}
+              history={history}
+            />
           </div>
         </div>
       </div>
