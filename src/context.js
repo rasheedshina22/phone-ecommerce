@@ -81,15 +81,76 @@ export default class ProductProvider extends Component {
   };
 
   increment = (id) => {
-    console.log("this is the increment method");
+    //you dont want to manipulate the state directly. that's why we are alwats doing themSomething
+    let tempCart = [...this.state.cart];
+    const SelectedProduct = tempCart.find((item) => item.id === id);
+    const index = tempCart.indexOf(SelectedProduct);
+    const product = tempCart[index];
+
+    product.count = product.count + 1;
+    product.total = product.count * product.price;
+
+    this.setState(
+      () => {
+        return {
+          cart: [...tempCart],
+        };
+      },
+      () => {
+        this.addTotals();
+      }
+    );
   };
 
   decrement = (id) => {
-    console.log("this is the decrement method");
+    //you dont want to manipulate the state directly. that's why we are alwats doing themSomething
+    let tempCart = [...this.state.cart];
+    const SelectedProduct = tempCart.find((item) => item.id === id);
+    const index = tempCart.indexOf(SelectedProduct);
+    const product = tempCart[index];
+    product.count = product.count - 1;
+
+    if (product.count === 0) {
+      this.removeItem(id);
+    } else {
+      product.total = product.count * product.price;
+
+      this.setState(
+        () => {
+          return {
+            cart: [...tempCart],
+          };
+        },
+        () => {
+          this.addTotals();
+        }
+      );
+    }
   };
 
   removeItem = (id) => {
-    console.log("this is the remove method");
+    let tempProducts = [...this.state.products];
+    let temCart = [...this.state.cart];
+
+    temCart = temCart.filter((item) => item.id !== id);
+
+    const index = tempProducts.indexOf(this.getItem(id));
+    let removedProduct = tempProducts[index];
+    removedProduct.inCart = false;
+    removedProduct.count = 0;
+    removedProduct.total = 0;
+
+    this.setState(
+      () => {
+        return {
+          cart: [...temCart],
+          products: [...tempProducts],
+        };
+      },
+      () => {
+        this.addTotals();
+      }
+    );
   };
 
   clearCart = () => {
